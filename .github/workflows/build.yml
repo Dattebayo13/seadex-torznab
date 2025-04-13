@@ -10,7 +10,7 @@ on:
         description: 'Version to release'
         required: true
         default: '1.0.0'
-        
+
 jobs:
   build:
     runs-on: ubuntu-20.04
@@ -36,6 +36,11 @@ jobs:
           cp dist/seadex-torznab release/
           cd release
           zip seadex-torznab-linux-binary.zip seadex-torznab
+
+      - name: Create a tag for the release
+        run: |
+          git tag v${{ github.event.inputs.version }}
+          git push origin v${{ github.event.inputs.version }}
 
       - name: Upload release asset
         uses: softprops/action-gh-release@v2
