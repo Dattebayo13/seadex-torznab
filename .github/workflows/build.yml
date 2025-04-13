@@ -25,7 +25,6 @@ jobs:
 
     - name: Build Linux executable
       run: |
-        source venv/bin/activate
         pyinstaller --onefile seadex-torznab.py
 
     - name: Upload the binary as an artifact
