@@ -20,13 +20,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        python -m venv venv
-        source venv/bin/activate
         pip install -r requirements.txt
-
-    - name: Install PyInstaller
-      run: |
-        source venv/bin/activate
         pip install pyinstaller
 
     - name: Build Linux executable
