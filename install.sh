@@ -78,7 +78,7 @@ EOF
 
   systemctl --user daemon-reload
   systemctl --user enable --now $SERVICE_NAME
-  echo "Service '$SERVICE_NAME' started and enabled (user systemd). Running on Port 49152"
+  echo "Service '$SERVICE_NAME' started and enabled (user systemd). Running on Port 49152."
 else
   echo "You can run it manually with:"
   echo "  $INSTALL_DIR/$SERVICE_NAME"
