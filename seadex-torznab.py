@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 # Constants
 ANIMETOSHO_TORZNAB_URL = "https://feed.animetosho.org/api"
-SEADEX_TORRENTS_API = "https://releases.moe/api/collections/entries/records"
+SEADEX_TORRENTS_API = "https://releases.moe/api/collections/torrents/records"
 TORZNAB_NS = "http://torznab.com/schemas/2015/feed"
 
 # Register torznab namespace
@@ -67,20 +67,20 @@ def proxy():
         item_xml = ET.tostring(item, encoding='unicode')
         match = re.search(r'https://nyaa\.si/view/\d+', item_xml)
         if match:
-            animetosho_links_query += f"trs.url%3F%3D'{match.group(0)}'%7C%7C"
+            animetosho_links_query += f"url='{match.group(0)}'||"
 
     if not animetosho_links_query:
         return Response(ET.tostring(tree, encoding="utf-8"), mimetype="application/rss+xml")
 
-    seadex_url = f"{SEADEX_TORRENTS_API}?filter={animetosho_links_query[:-6]}&expand=trs&skipTotal=true"
+    seadex_url = f"{SEADEX_TORRENTS_API}?filter={animetosho_links_query[:-2]}"
+    print(seadex_url)
     seadex_response = requests.get(seadex_url).json()
 
     valid_animetosho_urls = {
-        tr.get("url", "")
+        item.get("url", "")
         for item in seadex_response.get("items", [])
-        for tr in item.get("expand", {}).get("trs", [])
     }
-
+    print(valid_animetosho_urls)
     # Filter items not present in Seadex results
     channel = tree.find(".//channel")
     for item in items:
