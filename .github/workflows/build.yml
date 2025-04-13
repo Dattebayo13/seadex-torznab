@@ -1,0 +1,41 @@
+name: Build Linux Binary
+
+on:
+  push:
+    branches:
+      - main
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        python -m venv venv
+        source venv/bin/activate
+        pip install -r requirements.txt
+
+    - name: Install PyInstaller
+      run: |
+        source venv/bin/activate
+        pip install pyinstaller
+
+    - name: Build Linux executable
+      run: |
+        source venv/bin/activate
+        pyinstaller --onefile seadex-torznab.py
+
+    - name: Upload the binary as an artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: seadex-torznab-linux-binary
+        path: dist/seadex-torznab
