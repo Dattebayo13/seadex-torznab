@@ -3,8 +3,14 @@ name: Build and Release Linux Binary
 on:
   push:
     tags:
-      - 'v*'  # Triggers on version tags like v1.0.0
-
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release'
+        required: true
+        default: '1.0.0'
+        
 jobs:
   build:
     runs-on: ubuntu-20.04
