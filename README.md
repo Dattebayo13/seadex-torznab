@@ -1,5 +1,5 @@
 ## Seadex-Torznab
-A Torznab-compatible proxy that search for anime using [Seadex](https://releases.moe) and gets torrent information from [Animetosho](https://animetosho.org/). 
+A Torznab-compatible proxy that searches for anime using [Seadex](https://releases.moe) and gets torrent information from [Animetosho](https://animetosho.org/). 
 ## Installation
 ### Compiled Linux Binary
 ```bash
