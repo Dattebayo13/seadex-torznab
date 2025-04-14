@@ -6,6 +6,7 @@ A Torznab-compatible proxy that searches for anime using [Seadex](https://releas
 bash <(curl -s https://raw.githubusercontent.com/Dattebayo13/seadex-torznab/main/install.sh)
 ```
 ### Python
+(Requires Python 3.10 or higher)
 ```bash
 git clone https://github.com/Dattebayo13/seadex-torznab.git; cd seadex-torznab; pip install -r requirements.txt; python seadex-torznab.py
 ```
