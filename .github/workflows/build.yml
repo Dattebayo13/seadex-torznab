@@ -34,10 +34,9 @@ jobs:
           mkdir -p release
           cp dist/seadex-torznab release/
           cd release
-          zip seadex-torznab-linux-binary.zip seadex-torznab
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: seadex-torznab-linux-binary
-          path: release/seadex-torznab-linux-binary.zip
+          path: release/seadex-torznab
