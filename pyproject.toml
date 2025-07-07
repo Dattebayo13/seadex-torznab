@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [project.scripts]
-seadex-torznab = "seadex_torznab.main:main"
+seadex-torznab = "seadex_torznab.__main__:main"
 
 [build-system]
 requires = ["setuptools", "wheel"]
