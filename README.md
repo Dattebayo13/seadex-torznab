@@ -29,7 +29,7 @@ pip install "git+https://github.com/Dattebayo13/seadex-torznab.git"
 # If installed via the script or pip:
 seadex-torznab
 # Or, if running from source:
-python -m seadex_torznab
+python -m seadex_torznab.main
 ```
 
 - By default, the service runs on port 49152.
