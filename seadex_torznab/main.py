@@ -11,7 +11,7 @@ def main():
             port = int(sys.argv[1])
         except ValueError:
             print(f"Invalid port. Using default port {default_port}.")
-    app.run(port=port, debug=True)
+    app.run(port=port)
 
 
 if __name__ == "__main__":
