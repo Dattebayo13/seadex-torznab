@@ -1,6 +1,23 @@
-from flask import request, Response
+from flask import request, Response, jsonify
 from seadex_torznab.torznab import torznab_info, create_search_xml, clean_query_and_extract_season
 import logging
+
+
+def _parse_search_params():
+    query_params = request.args.to_dict()
+    query = query_params.get("q", "")
+    season_param = query_params.get("season")
+    title_base, parsed_season = clean_query_and_extract_season(query)
+
+    if season_param and int(season_param) > 1:
+        season = int(season_param)
+    elif parsed_season and parsed_season > 1:
+        season = parsed_season
+    else:
+        season = None
+
+    title = f"{title_base} Season {season}" if season else title_base
+    return query_params, query, title
 
 
 def register_routes(app):
@@ -9,19 +26,7 @@ def register_routes(app):
     @app.route('/api')
     def api_parse_url():
         """Handle the /api endpoint for search and capabilities."""
-        query_params = request.args.to_dict()
-        query = query_params.get("q", "")
-        season_param = query_params.get("season")
-        title_base, parsed_season = clean_query_and_extract_season(query)
-
-        if season_param and int(season_param) > 1:
-            season = int(season_param)
-        elif parsed_season and parsed_season > 1:
-            season = parsed_season
-        else:
-            season = None
-
-        title = f"{title_base} Season {season}" if season else title_base
+        query_params, query, title = _parse_search_params()
         search_type = query_params.get("t", "search")
 
         if search_type == 'caps':
@@ -58,6 +63,17 @@ def register_routes(app):
             rss_xml = create_search_xml(results)
             return Response(rss_xml, mimetype='application/rss+xml')
         return Response("", status=204)
+
+    @app.route('/json')
+    def api_json():
+        """Handle the /api/json endpoint for direct JSON search results."""
+        _, query, title = _parse_search_params()
+        try:
+            results = torznab_info(title if query else "Naruto")
+        except Exception as error:
+            logging.error(f"Error in torznab_info (JSON): {error}")
+            results = []
+        return jsonify(results)
 
     @app.route('/logs')
     def show_logs():
