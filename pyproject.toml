@@ -1,0 +1,20 @@
+[project]
+name = "seadex-torznab"
+version = "0.1.0"
+description = "A Torznab-compatible proxy for anime using Seadex and Animetosho."
+authors = [
+    { name = "Dattebayo13" }
+]
+requires-python = ">=3.10"
+dependencies = [
+    "Flask",
+    "requests",
+    "seadex"
+]
+
+[project.scripts]
+seadex-torznab = "seadex_torznab.main:main"
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta" 
