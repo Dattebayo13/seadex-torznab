@@ -9,8 +9,7 @@ Requires Python 3.10+ and git.
 ### Quick Install (Recommended)
 
 ```bash
-curl -O https://raw.githubusercontent.com/Dattebayo13/seadex-torznab/main/install.sh
-bash install.sh
+bash <(curl -s https://raw.githubusercontent.com/Dattebayo13/seadex-torznab/main/install.sh)
 ```
 - The script will set up a Python virtual environment in your home directory, install the latest version from GitHub, and optionally set up a user systemd service to run on login.
 - To uninstall, run the script again and choose "Uninstall".
