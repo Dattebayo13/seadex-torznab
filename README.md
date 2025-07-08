@@ -6,7 +6,7 @@ A Torznab-compatible proxy that searches for anime using [Seadex](https://releas
 
 Requires Python 3.10+ and git.
 
-### Quick Install (Recommended)
+### Quick Install (Linux Only)
 
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/Dattebayo13/seadex-torznab/main/install.sh)
@@ -14,13 +14,11 @@ bash <(curl -s https://raw.githubusercontent.com/Dattebayo13/seadex-torznab/main
 - The script will set up a Python virtual environment in your home directory, install the latest version from GitHub, and optionally set up a user systemd service to run on login.
 - To uninstall, run the script again and choose "Uninstall".
 
-### Manual Install
+### Manual Install (Python)
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install --upgrade pip
-pip install "git+https://github.com/Dattebayo13/seadex-torznab.git"
+pip install pipx
+pipx install "git+https://github.com/Dattebayo13/seadex-torznab.git"
 ```
 
 ## Usage
